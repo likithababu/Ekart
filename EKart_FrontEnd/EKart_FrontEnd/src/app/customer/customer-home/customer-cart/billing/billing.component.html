@@ -1,0 +1,17 @@
+<div *ngIf="!viewSuccess">
+<div *ngIf="viewAddress">
+    <app-address></app-address>
+
+    <button type="button" class="btn" (click)="viewAddress = false" style="background-color: olive;">Proceed</button>
+</div>
+
+<div *ngIf="!viewAddress">
+<h3>Payment</h3><br>
+<input type="radio" id="COD" name="Payment" value="COD"> COD(cash on delivery) <br>
+<button type="button" class="btn" (click)="viewSuccess=true" style="background-color:olive">Place Order</button>
+
+</div>
+</div>
+<div *ngIf="viewSuccess">
+    <h1 style="text-align: center;">Order has been placed sucessfully.........</h1>
+</div>

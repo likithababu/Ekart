@@ -1,0 +1,93 @@
+<div class="container">
+    <h3>Address</h3>
+    <div *ngFor="let add of address; let i = index">
+        <div class="card">
+          <div class="row">
+                <div class="col-auto" style="margin-left: 0.5cm; margin-top: auto; margin-bottom: auto;">
+                    <input type="radio" id="{{i}}" name="address" value="{{i}}" required>
+                </div>
+                <div class="col card-block offset-1">
+                    {{add.addressLine1}}, {{add.addressLine2}} <br>
+                    City: {{add.city}} <br>
+                    State: {{add.state}} <br>
+                    PinCode: {{add.pin}} <br>
+                    Contact no: {{add.contactNumber}} <br>
+                </div>
+                <br>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="!viewForm">
+        <br>
+    <button type="button" class="btn" (click)="addNewAddress()" style="background-color: yellowgreen;">New Address</button>
+        <br>
+        <br>
+</div>
+    <div class="row" *ngIf="viewForm">
+        <div class="col-6 offset-3 form-bg-light">
+            <form class="form" #addForm="ngForm">
+                <div class="form-group">
+                    <label for="addressLine1">Address Lane 1</label>
+                    <input type="text" name="addressLine1" class="form-control" id="addressLine1"
+                        [(ngModel)]="addressToAdd.addressLine1" required #addressLine1="ngModel">
+                    <div class="field-error-message" *ngIf="addressLine1.invalid && addressLine1.dirty">
+                        Address Lane is mandatory
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addressLine2">Address Lane 2</label>
+                    <input type="text" name="addressLine2" class="form-control" id="addressLine2"
+                        [(ngModel)]="addressToAdd.addressLine2" required #addressLine2="ngModel">
+                    <div class="field-error-message" *ngIf="addressLine2.invalid && addressLine2.dirty">
+                        Address Lane is mandatory
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" name="city" class="form-control" id="city" [(ngModel)]="addressToAdd.city" required
+                        #city="ngModel">
+                    <div class="field-error-message" *ngIf="city.invalid && city.dirty">
+                        City is mandatory
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" name="state" class="form-control" id="state" [(ngModel)]="addressToAdd.state"
+                        required #state="ngModel">
+                    <div class="field-error-message" *ngIf="state.invalid && state.dirty">
+                        State is mandatory
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pin">Pin code</label>
+                    <input type="text" name="pin" pattern="[0-9]{6}" class="form-control" id="pin"
+                        [(ngModel)]="addressToAdd.pin" required #pin="ngModel">
+                    <div class="field-error-message" *ngIf="pin.invalid && pin.dirty">
+                        Pin is mandatory and should be 6 digits
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">Phone Number</label>
+                    <input type="text" name="contactNumber" pattern="[0-9]{10}" class="form-control" id="contactNumber"
+                        [(ngModel)]="addressToAdd.contactNumber" required #contactNumber="ngModel">
+                    <div class="field-error-message" *ngIf="contactNumber.invalid && contactNumber.dirty">
+                        Contact number is mandatory and should be 10 digits
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <button class="btn btn-success" [disabled]="addForm.invalid"
+                        (click)="addAddress()">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-info" (click)="cancelAdd()">Cancel</button>
+                </div>
+    
+            </form>
+            
+        </div>
+    </div>
+    <h5 class="error-message">{{errorMessage}}</h5>
+            <h5 class="success-message">{{successMessage}}</h5>
+    
+
+</div>
